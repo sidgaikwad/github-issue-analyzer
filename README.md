@@ -31,7 +31,9 @@ I chose **JSON file storage** for the following reasons:
 
 - Node.js 18+ or higher
 - npm or yarn
-- Anthropic API key (for LLM analysis)
+- **Either** Anthropic API key **or** OpenAI API key (for LLM analysis)
+  - Anthropic API: https://console.anthropic.com/
+  - OpenAI API: https://platform.openai.com/api-keys
 
 ## Installation
 
@@ -48,11 +50,21 @@ cd github-issue-analyzer
 npm install
 ```
 
-3. Set your Anthropic API key:
+3. Set your API key (choose one):
+
+**Option A: Using Anthropic Claude**
 
 ```bash
-export ANTHROPIC_API_KEY='your-api-key-here'
+export ANTHROPIC_API_KEY='your-anthropic-api-key-here'
 ```
+
+**Option B: Using OpenAI**
+
+```bash
+export OPENAI_API_KEY='your-openai-api-key-here'
+```
+
+The application will automatically detect which API key is available and use that provider. If both are set, Anthropic Claude will be used by default.
 
 ## Running the Server
 
@@ -142,7 +154,7 @@ github-issue-analyzer/
 │   ├── types.ts          # TypeScript type definitions
 │   ├── cache.ts          # Cache service (JSON file operations)
 │   ├── github.ts         # GitHub API integration
-│   ├── llm.ts            # Anthropic LLM integration
+│   ├── llm.ts            # LLM integration (Anthropic/OpenAI)
 │   └── test.ts           # Test suite
 ├── dist/                 # Compiled JavaScript (generated)
 ├── package.json          # Dependencies and scripts
@@ -241,8 +253,45 @@ The service handles various error scenarios:
 
 ## Environment Variables
 
-- `ANTHROPIC_API_KEY` - Required: Your Anthropic API key
+- `ANTHROPIC_API_KEY` - Optional: Your Anthropic API key (for Claude)
+- `OPENAI_API_KEY` - Optional: Your OpenAI API key (for GPT-4)
 - `PORT` - Optional: Server port (default: 5000)
+
+**Note**: You must set at least one LLM API key (either Anthropic or OpenAI). If both are set, Anthropic Claude will be used by default.
+
+## LLM Provider Selection
+
+The application supports two LLM providers:
+
+### Anthropic Claude (Default)
+
+- **Model**: claude-sonnet-4-20250514
+- **Pros**: High-quality analysis, great at following instructions, excellent reasoning
+- **Setup**: Set `ANTHROPIC_API_KEY` environment variable
+
+### OpenAI GPT-4
+
+- **Model**: gpt-4o
+- **Pros**: Fast response times, widely available, consistent performance
+- **Setup**: Set `OPENAI_API_KEY` environment variable
+
+**Auto-detection**: The application automatically detects which API key is available:
+
+1. If only one key is set, that provider is used
+2. If both keys are set, Anthropic Claude is used (priority)
+3. If neither key is set, the server will fail to start with a clear error message
+
+When the server starts, it will log which provider it's using:
+
+```
+Using Anthropic Claude for LLM analysis
+```
+
+or
+
+```
+Using OpenAI for LLM analysis
+```
 
 ## Future Enhancements
 
