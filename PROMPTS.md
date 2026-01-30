@@ -408,6 +408,70 @@ Give me specific test scenarios to implement.
 
 ---
 
+---
+
+## OpenAI Integration Prompts (Added Later)
+
+### 21. Adding OpenAI Support
+
+**Prompt to AI:**
+
+```
+I want to add support for OpenAI API as an alternative to Anthropic Claude in my LLM service.
+Update the LLMService class to:
+- Support both Anthropic and OpenAI
+- Auto-detect which API key is available (ANTHROPIC_API_KEY or OPENAI_API_KEY)
+- Use Anthropic as default if both are set
+- Use GPT-4o model for OpenAI
+- Keep the same interface (analyzeIssues method)
+- Add private methods for each provider
+- Log which provider is being used on startup
+Show me the complete TypeScript implementation.
+```
+
+**Context:** Used to add dual LLM provider support to the application
+
+---
+
+### 22. Updating Dependencies for OpenAI
+
+**Prompt to AI:**
+
+```
+I've added OpenAI support to my TypeScript application. What version of the openai npm package
+should I use that's compatible with:
+- Node.js 18+
+- TypeScript 5.3+
+- Express 4.18
+- Existing @anthropic-ai/sdk 0.40.0
+
+Give me the exact version to add to package.json dependencies.
+```
+
+**Context:** Used to determine correct OpenAI package version
+
+---
+
+### 23. Documentation for Dual Provider Support
+
+**Prompt to AI:**
+
+```
+I've added support for both Anthropic Claude and OpenAI to my GitHub issue analyzer.
+Help me document this feature by:
+1. Updating the README with both API key options
+2. Explaining the auto-detection logic
+3. Creating a comparison table of both providers
+4. Adding troubleshooting for API key issues
+5. Showing how users can switch between providers
+
+Make it clear and user-friendly.
+```
+
+**Context:** Used to update documentation with OpenAI support information
+
+---
+
 ## Summary of Prompt Usage Strategy
 
 Throughout this project, I used AI tools (Claude) to:
