@@ -18,23 +18,44 @@ This will install:
 
 ## 2. Set API Key
 
-You need an Anthropic API key. Get one at: https://console.anthropic.com/
+You need either an Anthropic or OpenAI API key:
+
+- **Anthropic API**: Get one at https://console.anthropic.com/
+- **OpenAI API**: Get one at https://platform.openai.com/api-keys
+
+**Option A: Using Anthropic Claude (recommended)**
 
 ```bash
 export ANTHROPIC_API_KEY='your-api-key-here'
 ```
 
+**Option B: Using OpenAI GPT-4**
+
+```bash
+export OPENAI_API_KEY='your-api-key-here'
+```
+
 **Windows users (PowerShell):**
 
 ```powershell
+# For Anthropic
 $env:ANTHROPIC_API_KEY='your-api-key-here'
+
+# For OpenAI
+$env:OPENAI_API_KEY='your-api-key-here'
 ```
 
 **Windows users (CMD):**
 
 ```cmd
+REM For Anthropic
 set ANTHROPIC_API_KEY=your-api-key-here
+
+REM For OpenAI
+set OPENAI_API_KEY=your-api-key-here
 ```
+
+**Note**: The application will automatically detect which key is available. If both are set, Anthropic Claude will be used.
 
 ## 3. Start the Server
 
@@ -97,10 +118,16 @@ npm test
 - Make sure the server is running (`npm run dev`)
 - Check if port 5000 is available
 
-### "ANTHROPIC_API_KEY not found"
+### "ANTHROPIC_API_KEY or OPENAI_API_KEY not found"
 
-- Set the environment variable: `export ANTHROPIC_API_KEY='your-key'`
-- Verify: `echo $ANTHROPIC_API_KEY` (Mac/Linux) or `echo %ANTHROPIC_API_KEY%` (Windows CMD)
+- Set one of the environment variables:
+  - `export ANTHROPIC_API_KEY='your-key'` (for Claude)
+  - `export OPENAI_API_KEY='your-key'` (for GPT-4)
+- Verify:
+  - `echo $ANTHROPIC_API_KEY` (Mac/Linux)
+  - `echo $OPENAI_API_KEY` (Mac/Linux)
+  - `echo %ANTHROPIC_API_KEY%` (Windows CMD)
+  - `echo %OPENAI_API_KEY%` (Windows CMD)
 
 ### "Module not found" or TypeScript errors
 
